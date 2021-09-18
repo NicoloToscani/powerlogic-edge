@@ -22,4 +22,25 @@ The **powerlogic-edge** app can be downloaded in .app format from this repositor
 3. Import the .app file using the *Import Offline* button
 4. Wait until App is installed
 
+## Release History
+
+- 0.0.1
+  - The first release.
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## Contributing
+
+1. Fork it ([https://github.com/yourname/yourproject/fork](https://github.com/yourname/yourproject/fork))
+2. Create your feature branch (`git checkout -b feature/fooBar`)
+3. Commit your changes (`git commit -am 'Add some fooBar'`)
+4. Push to the branch (`git push origin feature/fooBar`)
+5. Create a new Pull Request
+
+## Contacts
+
+- Nicolò Toscani - [toscani.nicolo90@gmail.com](toscani.nicolo90@gmail.com)
+
 
