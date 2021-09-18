@@ -22,6 +22,56 @@ The **powerlogic-edge** app can be downloaded in .app format from this repositor
 3. Import the .app file using the *Import Offline* button
 4. Wait until App is installed
 
+## WinCC Unified Configuration
+
+In order for the application to work, it is necessary to insert some elements inside your WinCC Unified project, including :
+
+- **"EdgeReportTags"** Table Variables;
+- Report start/end and template name **controls**;
+- **"EdgeReportGlobalModule"** Global Scripts Module;
+- **"EdgeReportTriggerTask"** Scheduled Task.
+
+These elements are included in a TIA Portal V16 library **"EdgeReportLibrary"** provided along with the report-unified application and an application example.
+
+### "EdgeReportLibrary" Library Import
+
+From the TIA Portal V16 engineering software, open the **"Library"** side menu.
+Use the **"Open Global Libraries"** button and import the ```EdgeReportLibrary.zal16``` file.
+
+![6_WinCCUnifiedConfiguration_ImportLibrary](./docs/img/6_WinCCUnifiedConfiguration_ImportLibrary.png)
+
+### Table "EdgeReportTags" variables
+
+Import the **"EdgeReportTags"** Tags table within the HMI Tags of your TIA Portal V16 project.
+
+![6_WinCCUnifiedConfiguration_EdgeReportTags](./docs/img/6_WinCCUnifiedConfiguration_EdgeReportTags.png)
+
+Below are the details of the HMI Tags of the **"EdgeReportTags"** variable table:
+| **HMI Tag Name** | **Type** | **Description** |
+|---|---|---|
+| *ReportEndTimeTag* | WString                | Final time instant of the report. The format must adhere to date-time standards, *e.g. 01-01-2021, 12:00:00 PM*. See details here for accepted standards https://www.w3schools.com/js/js_date_formats.asp . |
+| *ReportStartTimeTag* | WString                | Initial time instant of the report. The format must adhere to date-time standards, *e.g. 01-01-2021, 12:00:00 PM*. Details on accepted standards here https://www.w3schools.com/js/js_date_formats.asp . |
+| *ReportFilenameTag* | WString        | Name of the last generated report file. Needed for PDF conversion by the **"EdgeReportGlobalModule"** scripts. |
+| *rpc_request* | Array [0..100] of WString        | Array of strings that contains the query for the report-unified application to read data.  The request can exceed 254 characters (limit of a WString variable), so it is split into fragments within this array. The request is then reassembled within the scripts of the **"EdgeReportGlobalModule"**. |
+| *rpc_request_status* | Int                | Status variable of the report-unified application requests. It is used as a trigger of the Scheduled **EdgeReportTriggerTask** during the generation of the report file. It can take on the following states: |
+|  |  | **0** = Off |
+|  |  | **1** = Reading request sent |
+|  |  | **2** = File Report generated |
+| *rpc_response* | WString                | Status variable of the responses provided by the WinCC Unified system to the report-unified application. It is used to describe the status of operations performed by WinCC Unified during the generation of the report file. It can take on the following states: |
+|  |  | **0** = Off |
+|  |  | **1** = Response with data sent to the app |
+|  |  | **2** = Report file converted to PDF |
+| *TemplateFilenameTag* | WString                        | Name of the template file to be used for report file generation. The name must match the name of the file loaded in the ```cfg-data/``` configuration volume of the report-edge app. The file format can be *.xlsx* or other formats as mentioned in Section [Introduction](#introduction). |
+| *TriggerTag1* | Bool                | Trigger variable for report generation. To trigger report generation this variable must make a positive edge *(0 --> 1)*. |
+| *TriggerDeleteReports* | Bool | Trigger variable for deleting all report files currently saved by the application. To delete all report files this variable must make a positive edge *(0 --> 1)*. |
+
+
+
+### Prerequisites
+
+1. A Unified Comfort Panel with SIMATIC Edge feature enabled.
+2. At least one user needs to be signed up
+
 ## Release History
 
 - 0.0.1
