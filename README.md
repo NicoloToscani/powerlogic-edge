@@ -65,13 +65,6 @@ Below are the details of the HMI Tags of the **"EdgeReportTags"** variable table
 | *TriggerTag1* | Bool                | Trigger variable for report generation. To trigger report generation this variable must make a positive edge *(0 --> 1)*. |
 | *TriggerDeleteReports* | Bool | Trigger variable for deleting all report files currently saved by the application. To delete all report files this variable must make a positive edge *(0 --> 1)*. |
 
-
-
-### Prerequisites
-
-1. A Unified Comfort Panel with SIMATIC Edge feature enabled.
-2. At least one user needs to be signed up
-
 ## Release History
 
 - 0.0.1
