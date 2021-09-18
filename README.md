@@ -26,23 +26,20 @@ The **powerlogic-edge** app can be downloaded in .app format from this repositor
 
 In order for the application to work, it is necessary to insert some elements inside your WinCC Unified project, including :
 
-- **"EdgeReportTags"** Table Variables;
-- Report start/end and template name **controls**;
-- **"EdgeReportGlobalModule"** Global Scripts Module;
-- **"EdgeReportTriggerTask"** Scheduled Task.
+- **"EdgePowerlogicTags"** Table Variables;
 
-These elements are included in a TIA Portal V16 library **"EdgeReportLibrary"** provided along with the report-unified application and an application example.
+These elements are included in a TIA Portal V17 library **"EdgePowerLinkLibrary"** provided along with the powerlink-edge application and an application example.
 
-### "EdgeReportLibrary" Library Import
+### "EdgePowerLinkLibrary" Library Import
 
 From the TIA Portal V16 engineering software, open the **"Library"** side menu.
-Use the **"Open Global Libraries"** button and import the ```EdgeReportLibrary.zal16``` file.
+Use the **"Open Global Libraries"** button and import the ```EdgePowerLinkLibrary.zal16``` file.
 
 ![6_WinCCUnifiedConfiguration_ImportLibrary](./docs/img/6_WinCCUnifiedConfiguration_ImportLibrary.png)
 
-### Table "EdgeReportTags" variables
+### Table "EdgePowerLinkTags" variables
 
-Import the **"EdgeReportTags"** Tags table within the HMI Tags of your TIA Portal V16 project.
+Import the **"EdgePowerLinkTags"** Tags table within the HMI Tags of your TIA Portal V17 project.
 
 ![6_WinCCUnifiedConfiguration_EdgeReportTags](./docs/img/6_WinCCUnifiedConfiguration_EdgeReportTags.png)
 
