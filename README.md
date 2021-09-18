@@ -37,9 +37,9 @@ Use the **"Open Global Libraries"** button and import the ```EdgePowerLogicLibra
 
 ![6_WinCCUnifiedConfiguration_ImportLibrary](./docs/img/6_WinCCUnifiedConfiguration_ImportLibrary.png)
 
-### Table "EdgePowerLinkTags" variables
+### Table "EdgePowerLogicTags" variables
 
-Import the **"EdgePowerLinkTags"** Tags table within the HMI Tags of your TIA Portal V17 project.
+Import the **"EdgePowerLogicTags"** Tags table within the HMI Tags of your TIA Portal V17 project.
 
 ![6_WinCCUnifiedConfiguration_EdgeReportTags](./docs/img/6_WinCCUnifiedConfiguration_EdgeReportTags.png)
 
