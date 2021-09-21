@@ -57,7 +57,7 @@ These elements are included in a TIA Portal V17 library **"EdgePowerLogicLibrary
 
 ### "EdgePowerLogicLibrary" Library Import
 
-From the TIA Portal V16 engineering software, open the **"Library"** side menu.
+From the TIA Portal V17 engineering software, open the **"Library"** side menu.
 Use the **"Open Global Libraries"** button and import the ```EdgePowerLogicLibrary.zal17``` file.
 
 ![6_WinCCUnifiedConfiguration_ImportLibrary](./docs/img/6_WinCCUnifiedConfiguration_ImportLibrary.png)
