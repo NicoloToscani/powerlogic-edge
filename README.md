@@ -66,23 +66,31 @@ Use the **"Open Global Libraries"** button and import the ```EdgePowerLogicLibra
 Import the **"EdgePowerLogicTags"** Tags table within the HMI Tags of your TIA Portal V17 project.
 
 Below are the details of the HMI Tags of the **"EdgeReportTags"** variable table:
-| **HMI Tag Name** | **Type** | **Description** |
-|---|---|---|
-| *ReportEndTimeTag* | WString                | Final time instant of the report. The format must adhere to date-time standards, *e.g. 01-01-2021, 12:00:00 PM*. See details here for accepted standards https://www.w3schools.com/js/js_date_formats.asp . |
-| *ReportStartTimeTag* | WString                | Initial time instant of the report. The format must adhere to date-time standards, *e.g. 01-01-2021, 12:00:00 PM*. Details on accepted standards here https://www.w3schools.com/js/js_date_formats.asp . |
-| *ReportFilenameTag* | WString        | Name of the last generated report file. Needed for PDF conversion by the **"EdgeReportGlobalModule"** scripts. |
-| *rpc_request* | Array [0..100] of WString        | Array of strings that contains the query for the report-unified application to read data.  The request can exceed 254 characters (limit of a WString variable), so it is split into fragments within this array. The request is then reassembled within the scripts of the **"EdgeReportGlobalModule"**. |
-| *rpc_request_status* | Int                | Status variable of the report-unified application requests. It is used as a trigger of the Scheduled **EdgeReportTriggerTask** during the generation of the report file. It can take on the following states: |
-|  |  | **0** = Off |
-|  |  | **1** = Reading request sent |
-|  |  | **2** = File Report generated |
-| *rpc_response* | WString                | Status variable of the responses provided by the WinCC Unified system to the report-unified application. It is used to describe the status of operations performed by WinCC Unified during the generation of the report file. It can take on the following states: |
-|  |  | **0** = Off |
-|  |  | **1** = Response with data sent to the app |
-|  |  | **2** = Report file converted to PDF |
-| *TemplateFilenameTag* | WString                        | Name of the template file to be used for report file generation. The name must match the name of the file loaded in the ```cfg-data/``` configuration volume of the report-edge app. The file format can be *.xlsx* or other formats as mentioned in Section [Introduction](#introduction). |
-| *TriggerTag1* | Bool                | Trigger variable for report generation. To trigger report generation this variable must make a positive edge *(0 --> 1)*. |
-| *TriggerDeleteReports* | Bool | Trigger variable for deleting all report files currently saved by the application. To delete all report files this variable must make a positive edge *(0 --> 1)*. |
+| HMI Tag Name                       | Type                  | Description                        | 
+| ---------------------------------- | --------------------- | ---------------------------------- | 
+|  I1                                | Real                  | Phase current 1 (A)                |
+|  I2                                | Real                  | Phase current 2 (A)                |
+|  I3                                | Real                  | Phase current 3 (A)                |
+|  I_Avg                             | Real                  | Current Avg (A)                    |
+|  L1_L2                             | Real                  | Voltage L1-L2 (V)                  |
+|  L2_L3                             | Real                  | Voltage L2-L3 (V)                  |
+|  L3_L1                             | Real                  | Voltage L3-L1 (V)                  |
+|  LL_Avg                            | Real                  | Voltage L-L Avg (V)                |
+|  L1_N                              | Real                  | Voltage L1-N (V)                   |
+|  L2_N                              | Real                  | Voltage L2-N (V)                   |
+|  LN_Avg                            | Real                  | Voltage L-N Avg (V)                |
+|  Active_Power_Ph1                  | Real                  | Active power phase 1 (Kw)          |
+|  Active_Power_Ph2                  | Real                  | Active power phase 2 (Kw)          |
+|  Active_Power_Ph3                  | Real                  | Active power phase 3 (Kw)          |
+|  Active_Power_Tot                  | Real                  | Total active power (Kw)            |
+|  Power_Factor                      | Real                  | Power factor total                 |
+|  Frequency                         | Real                  | Frequency (Hz)                     |
+|  Total_Active_Energy_Imported      | LReal                 | Total active energy imported (KwH) |
+
+
+
+
+
 
 ## Release History
 
