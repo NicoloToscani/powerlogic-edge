@@ -88,11 +88,7 @@ Below are the details of the HMI Tags of the **"EdgeReportTags"** variable table
 |  Total_Active_Energy_Imported      | LReal                 | Total active energy imported (KwH) |
 |  Ip_Address                        | WString               | Multimeter IPv4 address            |
 |  Port_Number                       | WString               | Multimeter Modbus port             |
-
-
-
-
-
+|  Enable                            | Bool                  | Enable application                 |
 
 ## Release History
 
