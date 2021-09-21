@@ -89,6 +89,7 @@ Below are the details of the HMI Tags of the **"EdgeReportTags"** variable table
 |  Ip_Address                        | WString               | Multimeter IPv4 address            |
 |  Port_Number                       | WString               | Multimeter Modbus port             |
 |  Enable                            | Bool                  | Enable application                 |
+|  Connection_State                  | Int                   | 0: disconnected, 1: connecting, 2: connected |
 
 ## Release History
 
