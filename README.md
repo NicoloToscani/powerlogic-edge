@@ -100,7 +100,7 @@ In order for the application to work, the following steps must be followed:
 - Connect variables for energy measures visualization
 
 
-![powerlogic-config](docs/data-config.png)
+![powerlogic-config](EdgePowerLogicSettings.png)
 
 
 ## Release History
