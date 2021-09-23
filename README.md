@@ -93,6 +93,8 @@ Below are the details of the HMI Tags of the **"EdgeReportTags"** variable table
 |  Connection_State                  | Int                   | **0**: disconnected; **1**: connecting; **2**: connected |
 
 ## How to use
+In order for the application to work, the following steps must be followed:
+- Start **powerlogic-edge** from *Edge Management* 
 
 ## Release History
 
