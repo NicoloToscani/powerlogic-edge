@@ -28,10 +28,18 @@ var net = require('net');
 
 //const PIPE_PATH = "\\\\.\\pipe\\HmiRuntime";
 
+var Enable = false;  // Enable reading
+var Ip_Address;      // Device IPv4
+var Port;            // Device Modbus port
+var Unit_Id;         // Modbus unit id
 
-// Modbus client
-var unitId = 1;
+// Socket
 const socket = new net.Socket()
+
+// Client Modbus
+let clientModbus;
+
+/*
 const options = {
     'host': '192.168.100.3',
     'port': '502'
@@ -39,9 +47,8 @@ const options = {
 
 socket.connect(options)
 
+*/
 
-
-const clientModbus = new Modbus.client.TCP(socket, unitId)
 /*
 socket.on('connect', function () {
 
@@ -64,7 +71,7 @@ socket.on('connect', function () {
     var I1 = 0;
     var I2 = 0;
     var I3 = 0;
-    var In = 0;
+   // var In = 0;
     var I_Avg = 0;
 
     // Voltage
@@ -96,6 +103,12 @@ socket.on('connect', function () {
 
 function Write() {
 
+    try{
+    // If reading process is enable
+    if(Enable == true){
+
+        
+
         // socket.on('connect', function () {  Check connection
     
         // Current
@@ -105,7 +118,7 @@ function Write() {
             I1 = resp.response.body.valuesAsBuffer.readFloatBE(0);  // I1
             I2 = resp.response.body.valuesAsBuffer.readFloatBE(4);  // I2
             I3 = resp.response.body.valuesAsBuffer.readFloatBE(8);  // I3
-            In = resp.response.body.valuesAsBuffer.readFloatBE(12);  // In
+            //In = resp.response.body.valuesAsBuffer.readFloatBE(12);  // In
             I_Avg = resp.response.body.valuesAsBuffer.readFloatBE(20);  // I_Avg
             
             console.log()
@@ -185,27 +198,31 @@ function Write() {
             console.log()
         }, console.error);
          
-         
 
-    // Esempio query
-    // var c = `{"Message":"WriteTag","Params":{"Tags":[{"Name":"Tag_0","Value":"50"},{"Name":"Tag_1","Value":"40"}]},"ClientCookie":"CookieReadTags123"}\n`;
-
-     var query = '{"Message":"WriteTag","Params":{"Tags":[{"Name":"I1","Value":"' + I1 + '"},{"Name":"I2","Value":"' + I2 + '"},{"Name":"I3","Value":"' + I3 + '"},{"Name":"In","Value":"' + In + '"}, {"Name":"I_Avg","Value":"' + I_Avg + '"},{"Name":"L1_L2","Value":"' + L1_L2 + '"},{"Name":"L2_L3","Value":"' + L2_L3 + '"},{"Name":"L3_L1","Value":"' + L3_L1 + '"},{"Name":"LL_Avg","Value":"' + LL_Avg + '"},{"Name":"L1_N","Value":"' + L1_N + '"},{"Name":"L2_N","Value":"' + L2_N + '"},{"Name":"L3_N","Value":"' + L3_N + '"},{"Name":"LN_Avg","Value":"' + LN_Avg + '"}]},"ClientCookie":"CookieReadTags123"}\n'
+    var query = '{"Message":"WriteTag","Params":{"Tags":[{"Name":"I1","Value":"' + I1 + '"},{"Name":"I2","Value":"' + I2 + '"},{"Name":"I3","Value":"' + I3 + '"}, {"Name":"I_Avg","Value":"' + I_Avg + '"},{"Name":"L1_L2","Value":"' + L1_L2 + '"},{"Name":"L2_L3","Value":"' + L2_L3 + '"},{"Name":"L3_L1","Value":"' + L3_L1 + '"},{"Name":"LL_Avg","Value":"' + LL_Avg + '"},{"Name":"L1_N","Value":"' + L1_N + '"},{"Name":"L2_N","Value":"' + L2_N + '"},{"Name":"L3_N","Value":"' + L3_N + '"},{"Name":"LN_Avg","Value":"' + LN_Avg + '"},{"Name":"Active_Power_Ph1","Value":"' + Active_Power_Ph1 + '"},{"Name":"Active_Power_Ph2","Value":"' + Active_Power_Ph2 + '"},{"Name":"Active_Power_Ph3","Value":"' + Active_Power_Ph3 + '"},{"Name":"Active_Power_Tot","Value":"' + Active_Power_Tot + '"},{"Name":"Power_Factor","Value":"' + Power_Factor + '"},{"Name":"Frequency","Value":"' + Frequency + '"},{"Name":"Total_Active_Energy_Imported","Value":"' + Total_Active_Energy_Imported + '"}]},"ClientCookie":"CookieReadTags123"}\n'
      
 
     var tagWriteCommand = query;
     client.write(tagWriteCommand);
-   
+
+    }
+    
+
+    }catch(error){
+
+        console.error
+
+    }
 }
 
-// Scheduling write on HMI
-setInterval(function(){
-    Write();
-}, 5000);
 
 
 let client = net.connect(PIPE_PATH, function() {
     console.log('Client: on connection');
+
+    // Subscription tag
+    var Subscribecommand = `{"Message":"SubscribeTag","Params":{"Tags":["Enable", "Ip_Address", "Port_Number", "Unit_Id"]},"ClientCookie":"mySubscription1"}\n`;
+    client.write(Subscribecommand);
 
     // Scheduling write on HMI
     setInterval(function(){
@@ -224,6 +241,44 @@ let client = net.connect(PIPE_PATH, function() {
         if (obj.Message == 'NotifyWriteTag') {
             printOnSuccess(obj.Params.Tags)
         }
+        if (obj.Message == 'NotifySubscribeTag') {
+            printOnSuccess(obj.Params.Tags)
+
+            // Enable = obj.Params.Tags[0].Value;
+            console.log(obj.Params.Tags[0].Value)
+            if(obj.Params.Tags[0].Value == 'TRUE'){
+                Enable = true;
+
+                // Check values from HMI
+                console.log('IPv4: ' + Ip_Address)
+                console.log('Port: ' + Port)
+                console.log('Unit ID: ' + Unit_Id)
+            }
+            else if(obj.Params.Tags[0].Value == "FALSE"){
+                Enable = false;
+            }
+            // console.log('Valore ENABLE: ' + obj.Params.Tags[0].Value )
+            Ip_Address = obj.Params.Tags[1].Value;
+            // console.log('Valore IP: ' + obj.Params.Tags[1].Value )
+            Port = obj.Params.Tags[2].Value;
+            // console.log('Valore PORT: ' + obj.Params.Tags[2].Value )
+            Unit_Id = obj.Params.Tags[3].Value;
+            // console.log('Valore UNIT ID: ' + obj.Params.Tags[3].Value )
+
+            if(Enable == true){
+                // Socket connection parameters from HMI
+                const options = {
+                    'host': Ip_Address,
+                    'port': Port
+               }
+               // Socket connection
+               socket.connect(options)
+
+               // Modbus client
+               clientModbus = new Modbus.client.TCP(socket, Unit_Id);
+            }
+
+        }          
         // On error
         if (obj.Message == 'ErrorWriteTag') {
             printError(obj)
@@ -234,8 +289,6 @@ let client = net.connect(PIPE_PATH, function() {
     client.on('end', function() {
     console.log('on end');
 });
-
-
 
 
 function printError(data) {
