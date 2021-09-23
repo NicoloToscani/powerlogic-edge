@@ -92,6 +92,8 @@ Below are the details of the HMI Tags of the **"EdgeReportTags"** variable table
 |  Enable                            | Bool                  | Enable application                 |
 |  Connection_State                  | Int                   | **0**: disconnected; **1**: connecting; **2**: connected |
 
+## How to use
+
 ## Release History
 
 - 0.0.1
