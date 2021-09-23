@@ -34,7 +34,7 @@ List of **PowerLogic** meter data:
 
 ### Download the App
 
-The **powerlogic-edge** app can be downloaded in .app format from this repository: ```powerlogic-edge_x.x.x.app```
+The **powerlogic-edge** app can be downloaded in .app format from this repository: ```https://drive.google.com/drive/folders/150FJPrJYlrYPZrD2MwN5WK9AnhwfODJG?usp=sharing```
 
 ### Prerequisites
 
