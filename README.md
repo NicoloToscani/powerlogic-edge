@@ -95,6 +95,9 @@ Below are the details of the HMI Tags of the **"EdgeReportTags"** variable table
 ## How to use
 In order for the application to work, the following steps must be followed:
 - Start **powerlogic-edge** from *Edge Management* 
+- Set *PowerLogic* communication parameters
+- Enable application with *Enable* switch
+- Connect variables for energy measures visualization
 
 ## Release History
 
