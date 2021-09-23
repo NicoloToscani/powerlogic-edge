@@ -98,7 +98,7 @@ In order for the application to work, the following steps must be followed:
 - Set *PowerLogic* communication parameters
 - Enable application with *Enable* switch
 - Connect variables for energy measures visualization
-![powerlogic-config](EdgePowerLogicSettings.png)
+(EdgePowerLogicSettings.png)
 
 ## Release History
 
