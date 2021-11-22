@@ -65,7 +65,7 @@ Use the **"Open Global Libraries"** button and import the ```EdgePowerLogicLibra
 
 Import the **"EdgePowerLogicTags"** Tags table within the HMI Tags of your TIA Portal V17 project.
 
-Below are the details of the HMI Tags of the **"EdgeReportTags"** variable table:
+Below are the details of the HMI Tags of the **"EdgePowerLogicTags"** variable table:
 | HMI Tag Name                       | Type                  | Description                        | 
 | ---------------------------------- | --------------------- | ---------------------------------- | 
 |  I1                                | Real                  | Phase current 1 (A)                |
